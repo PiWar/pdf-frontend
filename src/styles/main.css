@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    /* CSS HEX */
+    --night: #141414ff;
+    --seasalt: #fcfaf9ff;
+    --silver-lake-blue: #6290c3ff;
+    --sea-green: #00916eff;
+
+    /*!* CSS HSL *!*/
+    /*--night: hsla(0, 0%, 8%, 1);*/
+    /*--seasalt: hsla(20, 33%, 98%, 1);*/
+    /*--silver-lake-blue: hsla(212, 45%, 57%, 1);*/
+    /*--sea-green: hsla(166, 100%, 28%, 1);*/
+}
+
+body {
+    background: rgb(150,182,197);
+    background: linear-gradient(145deg, rgba(150,182,197,0.4) 0%, rgba(241,240,232,1) 100%);
+}
+
+
+.grid-col-convert-cards {
+    --min-size: 180px;
+    --size-function: auto-fill;
+    grid-template-columns: repeat(var(--size-function), minmax(var(--min-size), 1fr));
+}
+
+@media screen(sm) {
+    .grid-col-convert-cards {
+        --min-size: 220px;
+    }
+}
+
+@media screen(lg) {
+    .grid-col-convert-cards {
+        --min-size: 260px;
+    }
+}
