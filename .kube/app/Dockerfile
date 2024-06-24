@@ -2,7 +2,7 @@ ARG NODE
 
 FROM $NODE
 
-RUN npm install -g yarn
+RUN npm install -g yarn --force
 
 WORKDIR /var/www/html
 
