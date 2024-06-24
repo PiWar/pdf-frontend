@@ -1,6 +1,6 @@
-ARG NODE_IMAGE
+ARG NODE
 
-FROM $NODE_IMAGE
+FROM $NODE
 
 RUN npm install -g yarn
 
