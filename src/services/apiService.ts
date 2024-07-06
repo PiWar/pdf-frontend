@@ -5,7 +5,7 @@ import { ConvertedFile } from '@/shared/types/convertedFiles';
 export const apiService = {
   getTypesSettings: async () => {
     return await api.get<Record<string, ConvertSetting>>({
-      uri: '/api/v1/process/types',
+      uri: 'api/v1/process/types',
     });
   },
 
@@ -13,20 +13,20 @@ export const apiService = {
     return api.post<{
       uuid?: string;
     }>({
-      uri: '/api/v1/process/files',
+      uri: 'api/v1/process/files',
       data,
     });
   },
 
   getCentrifugoToken: async () => {
     return api.get<{ token: string }>({
-      uri: '/api/v1/centrifugo/token/anonymous',
+      uri: 'api/v1/centrifugo/token/anonymous',
     });
   },
 
   getFiles: async (uuid: string) => {
     return api.get<{ files: ConvertedFile[] }>({
-      uri: `/api/v1/process/${uuid}/files`,
+      uri: `api/v1/process/${uuid}/files`,
     });
   },
 } as const;
