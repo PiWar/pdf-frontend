@@ -11,7 +11,6 @@ export default async function ConvertType({ params: { type } }: PageProps) {
   const response = await apiService.getTypesSettings();
 
   if (isResponseError(response)) {
-    console.log(response);
     return redirect('/');
   }
 

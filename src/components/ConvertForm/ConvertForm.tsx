@@ -10,10 +10,11 @@ import { RichFile } from '@/shared/types/richFile';
 import { isImage } from '@/shared/utils/files/isImage';
 import { dataUrlFromFile } from '@/shared/utils/files/dataUrlfromFile';
 import { Option } from '@/components/ConvertForm/components/Option';
-import { convertFiles } from '@/actions/convertFiles';
+import { convertFiles } from '@/server-actions/convertFiles';
 import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/shared/constants/routes';
+import isEmpty from 'lodash/isEmpty';
 
 type ConvertFormProps = {
   convertInfo: ConvertInfo;
@@ -28,9 +29,9 @@ export const ConvertForm = ({
 }: ConvertFormProps) => {
   const [richFiles, setRichFiles] = useState<Nullable<RichFile[]>>();
   const inputId = 'files[]';
-  const [state, formAction] = useFormState(convertFiles, null);
+  const [state, formAction] = useFormState(convertFiles, {});
   const router = useRouter();
-  const inputFileRef = useRef<HTMLInputElement>(null);
+  const inputFileRef = useRef<Nullable<HTMLInputElement>>(null);
 
   const inputAcceptExt = useMemo(
     () =>
@@ -76,10 +77,13 @@ export const ConvertForm = ({
   };
 
   useEffect(() => {
-    if (state && !isResponseError(state)) {
+    if (isEmpty(state)) {
+      return;
+    }
+    if (!isResponseError(state)) {
       const uuid = (state as unknown as { uuid: string }).uuid;
       router.push(`${ROUTES.conversion}/${uuid}`);
-    } else if (state && isResponseError(state)) {
+    } else  {
       router.push(ROUTES.home);
     }
   }, [router, state]);

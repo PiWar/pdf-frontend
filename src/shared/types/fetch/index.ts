@@ -1,11 +1,11 @@
-type ApiErrors = string[];
+export type ResponseErrors = string[];
 
 export type BaseResponse<T = unknown> = {
   success: boolean;
 } & T;
 
 export type ResponseError = BaseResponse<{
-  errors: ApiErrors;
+  errors: ResponseErrors;
 }>;
 
 export type Response<T> = BaseResponse<{

@@ -31,6 +31,7 @@ export const sseService = {
 
       if (isNotNil(files)) {
         onData?.(files);
+        es.close()
       }
     };
 

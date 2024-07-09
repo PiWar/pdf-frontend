@@ -1,4 +1,4 @@
-import { BaseResponse, ResponseError } from '@/shared/types/api';
+import { BaseResponse, ResponseError } from '@/shared/types/fetch';
 
 export function isResponseError<T extends BaseResponse>(
   response: ResponseError | T

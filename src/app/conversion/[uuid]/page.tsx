@@ -8,10 +8,10 @@ import { ConvertedFilesList } from '@/components/ConvertedFilesList';
 type PageProps = ServerSideProps<{ uuid: string }>;
 
 export default async function Conversion({ params: { uuid } }: PageProps) {
-  const filesResponse = await apiService.getFiles(uuid);
+  const response = await apiService.getFiles(uuid);
 
-  if (!isResponseError(filesResponse)) {
-    return <ConvertedFilesList files={filesResponse.data.files} />;
+  if (!isResponseError(response)) {
+    return <ConvertedFilesList files={response.data.files} />;
   }
 
   const tokenResponse = await apiService.getCentrifugoToken();

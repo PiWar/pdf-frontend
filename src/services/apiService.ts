@@ -1,19 +1,20 @@
-import { api } from '@/api';
 import { ConvertSetting } from '@/shared/types/convertSetting';
 import { ConvertedFile } from '@/shared/types/convertedFiles';
+import { get, post } from '@/utils/fetch';
 
 export const apiService = {
   getTypesSettings: async () => {
-    return await api.get<Record<string, ConvertSetting>>({
+    return await get<Record<string, ConvertSetting>>({
       uri: '/api/v1/process/types',
       config: {
-        cache: 'no-store'
+        cache: 'no-store',
+        withClientInfo: true,
       }
     });
   },
 
   sendFiles: async (data: FormData) => {
-    return api.post<{
+    return post<{
       uuid?: string;
     }>({
       uri: '/api/v1/process/files',
@@ -22,7 +23,7 @@ export const apiService = {
   },
 
   getCentrifugoToken: async () => {
-    return api.get<{ token: string }>({
+    return get<{ token: string }>({
       uri: '/api/v1/centrifugo/token/anonymous',
       config: {
         cache: 'no-store' // change to invalidate after 24 hours
@@ -31,7 +32,7 @@ export const apiService = {
   },
 
   getFiles: async (uuid: string) => {
-    return api.get<{ files: ConvertedFile[] }>({
+    return get<{ files: ConvertedFile[] }>({
       uri: `/api/v1/process/${uuid}/files`, // check if it get data from cache on different machines
     });
   },
