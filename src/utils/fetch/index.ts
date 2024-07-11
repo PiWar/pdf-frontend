@@ -3,6 +3,7 @@ import 'server-only';
 import { Response, ResponseError } from '@/shared/types/fetch';
 import { headers } from 'next/headers';
 import merge from 'lodash/merge';
+import { logger } from '@/lib/logger';
 
 type RequestConfig = RequestInit & {
   /**
@@ -53,6 +54,11 @@ const request = async <TResponseData>(
   config?: RequestConfig
 ): Promise<Response<TResponseData> | ResponseError> => {
   try {
+    logger.debug({
+      uri,
+      headers: getConfig(config).headers
+    });
+
     const response = await fetch(
       process.env.NEXT_PUBLIC_API_URI + uri,
       getConfig(config)
@@ -60,9 +66,16 @@ const request = async <TResponseData>(
     return (await response.json()) as Promise<Response<TResponseData>>;
   } catch (e) {
     let message = 'Unknown Error';
+
     if (e instanceof Error) {
       message = e.message;
     }
+
+    logger.error({
+      uri,
+      error: message
+  });
+
     return getErrorResponse(message);
   }
 };

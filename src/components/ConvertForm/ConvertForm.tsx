@@ -78,7 +78,7 @@ export const ConvertForm = ({
   useEffect(() => {
     if (!state) return;
     if (!isResponseError(state)) {
-      const uuid = (state as unknown as { uuid: string }).uuid;
+      const { uuid } = state.data;
       router.push(`${ROUTES.conversion}/${uuid}`);
     } else {
       router.push(ROUTES.home);
@@ -114,7 +114,7 @@ export const ConvertForm = ({
       {isNotNil(richFiles) && richFiles.length ? (
         <div className='flex flex-1 gap-4'>
           <div className='flex h-fit flex-1 flex-wrap items-start justify-center gap-2 p-2'>
-            {richFiles.map((richFile, i) => {
+            {richFiles.map((richFile) => {
               return (
                 <FileCard
                   key={richFile.file.name}

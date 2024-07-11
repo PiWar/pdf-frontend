@@ -34,6 +34,9 @@ export const apiService = {
   getFiles: async (uuid: string) => {
     return get<{ files: ConvertedFile[] }>({
       uri: `/api/v1/process/${uuid}/files`, // check if it get data from cache on different machines
+      config: {
+        cache: 'no-store',
+      }
     });
   },
 } as const;
