@@ -29,7 +29,7 @@ const getClientInfo = (): RequestConfig => {
   const h = headers();
   return {
     headers: {
-      'x-real-ip': h.get('x-real-ip') || h.get('x-forwarded-for'),
+      'x-real-ip': h.get('x-real-ip') || h.get('x-forwarded-for') || '',
     },
   };
 };
@@ -37,7 +37,7 @@ const getClientInfo = (): RequestConfig => {
  * мб попробовать сделать через паттерн билдер
  * @param config
  */
-const getConfig = (config: RequestConfig) => {
+const getConfig = (config: RequestConfig = {}) => {
   let extendedConfig = config;
 
   if (config?.withClientInfo) {
