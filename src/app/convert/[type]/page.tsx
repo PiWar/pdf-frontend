@@ -3,7 +3,8 @@ import { apiService } from '@/services/apiService';
 import { isResponseError } from '@/shared/typeGuards';
 import { redirect } from 'next/navigation';
 import { ConvertForm } from '@/components/ConvertForm';
-import { CONVERTS_INFO } from '@/shared/constants/typesInfo';
+import { CONVERTS_INFO } from '@/shared/constants/convertsInfo';
+import { ROUTES } from '@/shared/constants/routes';
 
 type PageProps = ServerSideProps<{ type: string }>;
 
@@ -11,7 +12,7 @@ export default async function ConvertType({ params: { type } }: PageProps) {
   const response = await apiService.getTypesSettings();
 
   if (isResponseError(response)) {
-    return redirect('/');
+    return redirect(ROUTES.home);
   }
 
   //todo: придумать как проверять, по идее тут должно быть все ок

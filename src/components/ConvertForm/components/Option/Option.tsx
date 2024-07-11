@@ -1,5 +1,5 @@
 import { OptionProps } from '@/components/ConvertForm/components/Option/types';
-import { OPTIONS } from '@/shared/constants/OPTIONS';
+import { Options } from '@/shared/constants/options';
 
 export const Option = ({ name }: OptionProps) => {
   return (
@@ -11,7 +11,7 @@ export const Option = ({ name }: OptionProps) => {
         value={name}
       />
       <div className='rounded-md border-2 border-neutral-200 px-4 py-2 text-center transition-colors group-hover:border-neutral-300 peer-checked:border-[#A0C49D]'>
-        {OPTIONS[name] ?? name}
+        {Options[name] ?? name}
       </div>
     </label>
   );

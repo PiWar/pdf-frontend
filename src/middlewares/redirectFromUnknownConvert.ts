@@ -1,7 +1,7 @@
 import { MiddlewareFactory } from '@/shared/types/middlewareFactory';
 import { NextResponse } from 'next/server';
 import { ROUTES } from '@/shared/constants/routes';
-import { CONVERTS_INFO } from '@/shared/constants/typesInfo';
+import { CONVERTS_INFO } from '@/shared/constants/convertsInfo';
 
 // todo: возможно надо вынести куда-то (shared/constants)
 const availableConverts = Object.keys(CONVERTS_INFO).join('|');

@@ -1,7 +1,7 @@
 import { isResponseError } from '@/shared/typeGuards';
 import { apiService } from '@/services/apiService';
 import { ConvertCards } from '@/components/ConvertCards';
-import { CONVERTS_INFO } from '@/shared/constants/typesInfo';
+import { CONVERTS_INFO } from '@/shared/constants/convertsInfo';
 import { ROUTES } from '@/shared/constants/routes';
 import { RootError } from '@/components/RootError';
 

@@ -4,6 +4,7 @@ import { isResponseError } from '@/shared/typeGuards';
 import { redirect } from 'next/navigation';
 import { FilesLoader } from '@/components/FilesLoader';
 import { ConvertedFilesList } from '@/components/ConvertedFilesList';
+import {ROUTES} from "@/shared/constants/routes";
 
 type PageProps = ServerSideProps<{ uuid: string }>;
 
@@ -17,7 +18,7 @@ export default async function Conversion({ params: { uuid } }: PageProps) {
   const tokenResponse = await apiService.getCentrifugoToken();
 
   if (isResponseError(tokenResponse)) {
-    return redirect('/');
+    return redirect(ROUTES.home);
   }
 
   return <FilesLoader uuid={uuid} token={tokenResponse.data.token} />;

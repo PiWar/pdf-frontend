@@ -14,7 +14,6 @@ import { convertFiles } from '@/server-actions/convertFiles';
 import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/shared/constants/routes';
-import isEmpty from 'lodash/isEmpty';
 
 type ConvertFormProps = {
   convertInfo: ConvertInfo;
@@ -29,7 +28,7 @@ export const ConvertForm = ({
 }: ConvertFormProps) => {
   const [richFiles, setRichFiles] = useState<Nullable<RichFile[]>>();
   const inputId = 'files[]';
-  const [state, formAction] = useFormState(convertFiles, {});
+  const [state, formAction] = useFormState(convertFiles, null);
   const router = useRouter();
   const inputFileRef = useRef<Nullable<HTMLInputElement>>(null);
 
@@ -77,13 +76,11 @@ export const ConvertForm = ({
   };
 
   useEffect(() => {
-    if (isEmpty(state)) {
-      return;
-    }
+    if (!state) return;
     if (!isResponseError(state)) {
       const uuid = (state as unknown as { uuid: string }).uuid;
       router.push(`${ROUTES.conversion}/${uuid}`);
-    } else  {
+    } else {
       router.push(ROUTES.home);
     }
   }, [router, state]);
