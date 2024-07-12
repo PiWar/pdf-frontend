@@ -30,7 +30,8 @@ const getClientInfo = (): RequestConfig => {
   const h = headers();
   return {
     headers: {
-      'x-real-ip': h.get('x-real-ip') || h.get('x-forwarded-for') || '',
+      'x-real-ip': h.get('x-real-ip') || '',
+      'x-forwarded-for': h.get('x-forwarded-for') || ''
     },
   };
 };
