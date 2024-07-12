@@ -18,7 +18,11 @@ export const apiService = {
       uuid?: string;
     }>({
       uri: '/api/v1/process/files',
-      data,
+      data: data,
+      config: {
+        cache: 'no-store',
+        withClientInfo: true,
+      }
     });
   },
 
